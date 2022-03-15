@@ -1,0 +1,19 @@
+<% if admin_user_signed_in? %>
+ <li class="nav-item" style="margin-left:54%">
+        <%= link_to 'logout', destroy_admin_user_session_path%>
+    </li>
+    </ul>
+
+<% else %>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link">Stranger</a>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Sign up', new_admin_user_registration_path, class: "nav-link"%>
+    </li>
+      <li class="nav-item">
+      <%= link_to 'Sign in', new_admin_user_session_path, class: "nav-link"%>
+    </li>
+  </ul>
+<% end %>
