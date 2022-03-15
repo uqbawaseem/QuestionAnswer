@@ -34,6 +34,8 @@ group :development, :test do
 end
 
 group :development do
+  #gem letter_opener
+  gem "letter_opener", group: :development
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -54,9 +56,19 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#gem binding pry
+gem 'pry', '~> 0.13.1'
 # gem Devise
 gem 'devise'
 # gem Bootstrap
 gem 'bootstrap', '~> 5.1.3'
 # gem Jquery
 gem 'jquery-rails'
+# gem activeadmin
+gem 'activeadmin'
+#gem active admin theme
+gem 'arctic_admin'
+# gem canCan
+gem "cancan"
+#gem awesome print
+gem 'awesome_print', '~> 1.8'
