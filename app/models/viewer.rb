@@ -1,3 +1,3 @@
-class Viewer < AdminUser
+class Viewer < User
     # ...
   end

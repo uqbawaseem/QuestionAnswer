@@ -59,7 +59,7 @@ config.meta_tags_for_logged_out_pages = meta_tags_options
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  config.authentication_method = :authenticate_admin_user!
+  config.authentication_method = :authenticate_user!
 
   # == User Authorization
   #
@@ -96,7 +96,7 @@ config.meta_tags_for_logged_out_pages = meta_tags_options
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_admin_user
+  config.current_user_method = :current_user
 
   # == Logging Out
   #
@@ -108,7 +108,7 @@ config.meta_tags_for_logged_out_pages = meta_tags_options
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_admin_user_session_path
+  config.logout_link_path = :destroy_user_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -122,7 +122,7 @@ config.meta_tags_for_logged_out_pages = meta_tags_options
   # roots for each namespace.
   #
   # Default:
-    config.root_to = 'admin_users#index'
+    config.root_to = 'users#index'
 
   # == Admin Comments
   #
