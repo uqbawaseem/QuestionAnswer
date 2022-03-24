@@ -1,0 +1,31 @@
+<div class="container">
+    <center>
+        <h3 class=" p-5">
+            SELECT QUESTIONS
+        </h3>
+    </center>
+    <%= form_tag question_print_page_path , :method => :get do |f| %>
+    <table class="table table-borderless">
+        <thead id="add_new_fields">
+        <tr>
+            <td style="text-align:center;">Select Tecnology: </td>
+            <td><%= select_tag 'questions[][tech_id]', options_for_select($technologies.collect{ |u| [u.name, u.id] }), class: "form-control", :include_blank => false, :prompt => 'Select Technology'%></td>
+            <td><%= text_field_tag 'questions[][range]', nil, :required => false, class: "form-control", placeholder: 'How many questions?'%></td>
+        </tr>
+        </thead>
+        <tr>
+            <td colspan=3><%= link_to "Add More Technology", add_new_fields_path, remote: true, class: "btn btn-primary btn-sm float-end"%></td>
+        </tr>
+        <tbody>
+        <tr>
+            <td style="text-align:center;">Select Marks Range: </td>
+            <td><%= text_field_tag 'marks_range_from', value=2, placeholder: 'From', class: "form-control"%></td>
+            <td><%= text_field_tag 'marks_range_to', value=5, placeholder: 'To', class: "form-control"%></td>
+        </tr>
+
+       </tbody>
+    </table>
+    <p style="text-align: center;"> 
+        <%= submit_tag 'Filter', class: "btn btn-success m-5"%>
+    </p>
+    <% end %>

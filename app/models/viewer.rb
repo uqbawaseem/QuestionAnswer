@@ -1,3 +1,2 @@
 class Viewer < User
-    # ...
-  end
+end

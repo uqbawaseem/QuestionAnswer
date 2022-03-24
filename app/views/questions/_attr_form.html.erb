@@ -1,0 +1,5 @@
+<tr>
+    <td style="text-align:center;">Select Tecnology: </td>
+    <td><%= select_tag 'questions[][tech_id]', options_for_select($technologies.collect{ |u| [u.name, u.id] }), class: "form-control", :include_blank => false, :prompt => 'Select Technology'%></td>
+    <td><%= text_field_tag 'questions[][range]', nil, :required => false, class: "form-control", placeholder: 'How many questions?'%></td>
+</tr>

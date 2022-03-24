@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>  
+<h4 style="text-align: center;">INTERVIEW TEST</h4>
+<h5>To be filled by candidate:</h5>
+<table class="table table-bordered">
+    <tr>
+        <td colspan="2">Candidate Name: </td>
+        <td colspan="2">Job Post: </td>
+    </tr>
+    <tr>
+        <td colspan="2">Current Company: </td>
+        <td colspan="2">Current Salary: </td>
+    </tr>
+    <tr>
+        <td colspan="2">Expected Salary: </td>
+        <td colspan="2">When you join: </td>
+    </tr>
+</table>
+<h5>For office use only:</h5>
+<table class="table table-bordered">
+    <tr>
+        <td colspan="2">Test start & end time: </td>
+        <td colspan="2">Test Checked By: </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <textarea class="form-control"  placeholder="Remarks: " rows="3"></textarea>
+            
+            </textarea>
+        </td>
+    </tr>
+</table>
+<% if params[:questions].present?%>
+<table class="table table-borderless">
+    <% params[:questions].each do |question|%>
+        <% if question[:tech_id].present? && question[:range].present? && params[:marks_range_to].present? && params[:marks_range_from].present?%>
+            <% questions = Question.where(technology_id: question[:tech_id]).where(marks: params[:marks_range_from]..params[:marks_range_to]).where(status: true).limit(question[:range]).order('RAND()') %>
+            <% questions.each do |q| %>
+                <tr>
+                    <td>
+                        <strong>Question# <%= q.id%>: </strong>
+                        <strong><%= q.question.capitalize.tr('.', '')%>?</strong>
+                    </td>
+                    <td>(<%= q.marks%>)</td>
+                </tr>
+            <% end %>
+        <% end %>
+    <%end%>
+</table>
+<%end%>
+</body>
+</html>
+    

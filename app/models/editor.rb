@@ -1,3 +1,2 @@
 class Editor < User
-    # ...
-  end
+end
