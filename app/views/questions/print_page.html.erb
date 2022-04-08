@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>  
+<div class="container">
+<body>
 <h4 style="text-align: center;">INTERVIEW TEST</h4>
 <h5>To be filled by candidate:</h5>
 <table class="table table-bordered">
     <tr>
         <td colspan="2">Candidate Name: </td>
-        <td colspan="2">Job Post: </td>
+        <td colspan="2">Applied For: </td>
     </tr>
     <tr>
         <td colspan="2">Current Company: </td>
@@ -14,35 +15,81 @@
     </tr>
     <tr>
         <td colspan="2">Expected Salary: </td>
-        <td colspan="2">When you join: </td>
+        <td colspan="2">Expected Joining Date: </td>
     </tr>
-</table>
-<h5>For office use only:</h5>
-<table class="table table-bordered">
     <tr>
-        <td colspan="2">Test start & end time: </td>
+        <td colspan="3"><h5>For office use only:</h5></td>
+    </tr>
+    <tr>
+        <td colspan="2">Test Start & End Time: </td>
         <td colspan="2">Test Checked By: </td>
     </tr>
     <tr>
-        <td colspan="4">
-            <textarea class="form-control"  placeholder="Remarks: " rows="3"></textarea>
-            
-            </textarea>
+    <% if params[:questions].present?%>
+        <% params[:questions].each do |question|%>
+            <% if question[:tech_id].present? && question[:range].present? && params[:marks_range_to].present? && params[:marks_range_from].present?%>
+            <% questions = Question.where(technology_id: question[:tech_id]).where(marks: params[:marks_range_from]..params[:marks_range_to]).where(status: true).limit(question[:range]).order('RAND()') %>
+                <% questions.group_by{|q| q.technology_id}.each do |a|%>
+                    <% tech = a[0]%>
+                    <%tec = Technology.where(id: tech)%>
+                    <%tec.each do |te|%>
+                <td class="spacing">
+                    <%= te.name%>
+                <%end%>
+               <span>/<%= a[1].sum(&:marks)%></span>
+                </td>
+                <%end%>
+        <%end%>
+        <%end%>
+    <%end%>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <table class="table table-bordered">
+                <tr>
+                   <td>Remarks</td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
 <% if params[:questions].present?%>
-<table class="table table-borderless">
+<table class="table table-borderless m-0">
     <% params[:questions].each do |question|%>
         <% if question[:tech_id].present? && question[:range].present? && params[:marks_range_to].present? && params[:marks_range_from].present?%>
             <% questions = Question.where(technology_id: question[:tech_id]).where(marks: params[:marks_range_from]..params[:marks_range_to]).where(status: true).limit(question[:range]).order('RAND()') %>
+                <tr { style = "border-bottom: 0.2rem solid black;" }>
+                        <%tech = question[:tech_id]%>
+                        <% @query1 = Technology.where(id: tech)%>
+                        <% @query1.each do |f| %>
+                        <th><%= f.name%></th>
+                        <%end%>
+                <tr>
             <% questions.each do |q| %>
                 <tr>
                     <td>
-                        <strong>Question# <%= q.id%>: </strong>
-                        <strong><%= q.question.capitalize.tr('.', '')%>?</strong>
+                        QID<%= q.id%>:
+                        <td><%= ques = q.question.html_safe%>
+                        <%ques.capitalize%>
+                        <%ques.tr(',',' ')%>
+                        </td>
                     </td>
-                    <td>(<%= q.marks%>)</td>
+                    <td>(<%= q.marks.to_i%>)</td>
                 </tr>
             <% end %>
         <% end %>
@@ -50,5 +97,5 @@
 </table>
 <%end%>
 </body>
+</div>
 </html>
-    
